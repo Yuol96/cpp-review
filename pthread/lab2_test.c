@@ -15,11 +15,9 @@ typedef struct package
 {
     work_entry work_queue[5];
     int workQueueLength;
-    int front, rear;
     bool endFile;
     FILE *fp;
     pthread_mutex_t mutex;
-    pthread_cond_t producerC, consumerC;
 }package;
 
 /*The producer function is used to read data from target files, discard those which are illegal,
@@ -93,8 +91,6 @@ int main()
     p -> workQueueLength = 0;
     p -> endFile = false;
     p -> fp = fopen("PC_data_t00100", "r");
-    p->front = 0;
-    p->rear = 0;
 
     pthread_t producerT;
     pthread_t consumerT;

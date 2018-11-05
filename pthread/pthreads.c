@@ -1,6 +1,6 @@
 #include <pthread.h>
 #include <stdio.h>
-#define MAX_NUM 1000
+#define MAX_NUM 100
 
 typedef struct
 {
@@ -27,12 +27,12 @@ void * producer(void * nul)
         }
 
         buf.num[buf.length] = i;
-        printf("producer produces %d \n", buf.num[buf.length]);
+        printf("producer produces %d, buffer length: %d\n", buf.num[buf.length], buf.length+1);
         buf.length += 1;
 
         pthread_cond_signal(&pc_condc);
         pthread_mutex_unlock(&pc_mutex);
-        usleep(1);
+        // usleep(1);
     }
     pthread_exit(NULL);
 
@@ -50,7 +50,7 @@ void * consumer(void * nul)
             pthread_cond_wait(&pc_condc, &pc_mutex);
         }
 
-        printf("consumer consumes %d\n", buf.num[buf.length-1]);
+        printf("consumer consumes %d, buffer length: %d\n", buf.num[buf.length-1], buf.length-1);
         buf.length -= 1;
 
         pthread_cond_signal(&pc_condp);

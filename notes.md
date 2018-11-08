@@ -12,6 +12,7 @@
   - 如果初始化表达式为const或volatile（或者两者兼有），则除去const/volatile语义。
   - 初始化表达式为数组时，auto关键字推导类型为指针。
   - 若表达式为数组且auto带上&，则推导类型为数组类型。
+- 详细内容 https://blog.csdn.net/zhouzhenhe2008/article/details/74936765 
 
 # stack
 
